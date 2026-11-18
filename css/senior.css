@@ -1,0 +1,412 @@
+/* SENIOR (file tab) + overlay warna poster di foto */
+/* --c didaftarkan sebagai warna supaya perpindahan warna tema bisa dianimasikan */
+@property --d {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #8a0f0f
+}
+
+@property --c {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #c41212
+}
+
+.files {
+    --aw: min(62vw, 640px);
+    display: flex;
+    align-items: stretch;
+    height: calc(100dvh - var(--hh, 64px) - 210px);
+    min-height: 460px;
+    padding-left: 30px;
+    overflow-x: auto;
+    background: #000;
+    scrollbar-width: thin;
+    scrollbar-color: #c41212 #000
+}
+
+.sf {
+    --bg: #b4b2b7;
+    /* latar tab tertutup: gradasi dari versi pekat warna tema poster (--d diisi senior.js) */
+    --im: linear-gradient(var(--d), color-mix(in srgb, var(--d) 40%, #000));
+    flex: none;
+    width: 60px;
+    position: relative;
+    z-index: var(--z);
+    cursor: pointer;
+    background: var(--bg);
+    color: var(--t);
+    transition: width .9s cubic-bezier(.22, .8, .2, 1), background .6s, filter .4s, --c .7s, --d .7s
+}
+
+/* FIX: tepi 2px tab tertutup tidak lagi abu-abu terang, ikut warna tema yang gelap */
+.sf:not(.act) {
+    background: var(--d)
+}
+
+.sf:not(.act):hover {
+    filter: brightness(1.1)
+}
+
+.sf.act {
+    --bg: var(--c);
+    width: var(--aw);
+    cursor: default
+}
+
+.stb {
+    position: absolute;
+    z-index: 2;
+    left: -30px;
+    top: var(--ty);
+    width: 30px;
+    height: auto;
+    min-height: 104px;
+    max-height: 240px;
+    padding: 16px 0;
+    display: grid;
+    place-items: center;
+    writing-mode: vertical-rl;
+    white-space: nowrap;
+    background: var(--bg);
+    color: #2a272e;
+    font: 500 9px Poppins, system-ui, sans-serif;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    clip-path: polygon(100% 0, 100% 100%, 38% 100%, 0 80%, 0 20%, 38% 0);
+    transition: background .6s, color .6s
+}
+
+.sf.act .stb {
+    color: var(--k)
+}
+
+.sc {
+    position: absolute;
+    inset: 2px;
+    overflow: hidden;
+    background: var(--im);
+    transition: background .6s
+}
+
+.sf.act .sc {
+    background: #0f0e11
+}
+
+.svt {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    max-height: calc(100% - 28px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font: 600 22px Cinzel, Georgia, serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 2px 12px #0008;
+    transition: opacity .4s
+}
+
+.sf.act .svt {
+    opacity: 0;
+    pointer-events: none
+}
+
+.spg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--aw);
+    height: 100%;
+    overflow: auto;
+    padding: 26px 46px 30px 34px;
+    transition: opacity .6s .45s;
+    scrollbar-width: thin;
+    scrollbar-color: var(--c) transparent
+}
+
+.sf:not(.act) .spg {
+    opacity: 0;
+    pointer-events: none;
+    transition-delay: 0s
+}
+
+.sh {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 62px;
+    border: 1px solid var(--c);
+    background: #15131a;
+    padding: 0 6px
+}
+
+.sh b {
+    flex: none;
+    width: 50px;
+    height: 48px;
+    background: var(--c);
+    color: var(--k);
+    display: grid;
+    place-items: center;
+    font: 700 20px Cinzel, Georgia, serif
+}
+
+.sh div {
+    font: 500 11px/1.5 Poppins, system-ui, sans-serif;
+    letter-spacing: .12em
+}
+
+.sh small {
+    display: block;
+    font-size: 9px;
+    font-weight: 300;
+    color: var(--m)
+}
+
+.dash {
+    height: 3px;
+    margin: 18px 0 8px;
+    background: repeating-linear-gradient(90deg, var(--c) 0 22px, transparent 22px 28px)
+}
+
+.mr {
+    display: flex;
+    justify-content: space-between;
+    font: 300 10px Poppins, system-ui, sans-serif;
+    letter-spacing: .12em;
+    color: var(--m)
+}
+
+.tt {
+    margin-top: 28px;
+    border-left: 3px solid var(--c);
+    padding-left: 14px
+}
+
+.cd {
+    display: inline-block;
+    border: 1px solid var(--y);
+    padding: 4px 8px;
+    font: 400 9px Poppins, system-ui, sans-serif;
+    letter-spacing: .12em;
+    color: var(--y)
+}
+
+.tt h3 {
+    font: 700 clamp(32px, 6vw, 54px)/1.05 Cinzel, Georgia, serif;
+    font-style: normal;
+    letter-spacing: .06em;
+    color: var(--t);
+    margin-top: 16px;
+    text-transform: uppercase
+}
+
+.tt p {
+    font: 300 11px/1.8 Poppins, system-ui, sans-serif;
+    margin-top: 14px;
+    letter-spacing: .14em;
+    color: #b9b2a6
+}
+
+.gr {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 26px 18px;
+    margin: 34px 6px 0 0
+}
+
+.mc {
+    min-width: 0;
+    text-align: center
+}
+
+.bk {
+    position: relative;
+    aspect-ratio: 3/4;
+    border: 1px solid var(--c);
+    padding: 4px;
+    background: #17151a
+}
+
+.bk::before,
+.bk::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--y)
+}
+
+.bk::before {
+    top: -4px;
+    left: -4px;
+    border-right: 0;
+    border-bottom: 0
+}
+
+.bk::after {
+    bottom: -4px;
+    right: -4px;
+    border-left: 0;
+    border-top: 0
+}
+
+.bk i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(#2a272e, #0f0e11);
+    color: #4a4650
+}
+
+.bk svg {
+    position: absolute;
+    left: 50%;
+    top: 14%;
+    height: 150%;
+    transform: translateX(-50%)
+}
+
+.bk img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block
+}
+
+/* penyeragaman foto: warna foto diganti nada tema poster (--c), tepi digelapkan; hover = foto asli */
+.bk img {
+    filter: grayscale(.3) contrast(1.08) brightness(.92);
+    transition: filter .5s
+}
+
+.bk i::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: var(--c);
+    mix-blend-mode: color;
+    opacity: .62;
+    transition: opacity .4s
+}
+
+.bk i::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 50% 38%, transparent 48%, #0c0b0dcc 100%),
+        linear-gradient(to top, #0f0e11d9, transparent 42%);
+    transition: opacity .4s
+}
+
+.mc:hover .bk i::before {
+    opacity: 0
+}
+
+.mc:hover .bk i::after {
+    opacity: .45
+}
+
+.mc:hover .bk img {
+    filter: none
+}
+
+.ph {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font: 300 10px Poppins, system-ui, sans-serif;
+    letter-spacing: .3em;
+    color: #4a4650
+}
+
+.mc h4 {
+    font: 600 15px/1.25 Cinzel, Georgia, serif;
+    font-style: normal;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-top: 10px;
+    overflow-wrap: anywhere
+}
+
+.mc small {
+    font: 300 11px Poppins, system-ui, sans-serif;
+    letter-spacing: .14em;
+    color: #b9b2a6
+}
+
+.sb {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 34px;
+    background: var(--c);
+    color: var(--k);
+    padding: 10px 12px;
+    font: 500 10px Poppins, system-ui, sans-serif;
+    letter-spacing: .12em
+}
+
+#v-senior h2 {
+    font-family: Cinzel, Georgia, serif;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: .04em
+}
+
+@media(max-width:760px) {
+    .files {
+        --aw: min(86vw, 520px);
+        height: calc(100dvh - var(--hh, 100px) - 130px);
+        min-height: 420px
+    }
+
+    .sf {
+        width: 50px
+    }
+
+    .spg {
+        padding: 20px 48px 24px 20px
+    }
+
+    /* minmax(0,1fr): kolom selalu sama lebar walau ada nama panjang (1fr biasa bisa melebar & mendorong kolom kanan) */
+    .gr {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px 16px;
+        margin-right: 0
+    }
+
+    .mc h4 {
+        font-size: 13px;
+        letter-spacing: .06em
+    }
+
+    .mc small {
+        font-size: 10px
+    }
+
+    .svt {
+        font-size: 18px
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    .sf,
+    .spg {
+        transition-duration: .01s !important;
+        transition-delay: 0s !important
+    }
+}
