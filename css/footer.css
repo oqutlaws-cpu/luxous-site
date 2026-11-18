@@ -1,0 +1,112 @@
+/* FOOTER + FASILITAS */
+/* deretan icon Fasilitas (di dalam kartu About) */
+.fac {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed color-mix(in srgb, var(--y) 35%, transparent)
+}
+
+.fac-i {
+    --cut: 8px;
+    --ac: var(--y);
+    position: relative;
+    display: block;
+    width: 46px;
+    height: 46px;
+    padding: 11px;
+    color: var(--ac);
+    background: color-mix(in srgb, var(--ac) 55%, transparent);
+    clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut));
+    transition: transform .35s cubic-bezier(.22, .8, .2, 1), color .35s
+}
+
+.fac-i::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    background: #0e0d10;
+    clip-path: inherit;
+    transition: background .35s
+}
+
+.fac-i svg {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linejoin: round;
+    stroke-linecap: round
+}
+
+.fac-i:hover,
+.fac-i:focus-visible {
+    transform: translateY(-3px);
+    color: #fff
+}
+
+.fac-i:hover::before,
+.fac-i:focus-visible::before {
+    background: var(--ac)
+}
+
+.fac-i.off {
+    opacity: .45;
+    pointer-events: none
+}
+
+/* footer */
+.ft {
+    position: relative;
+    max-width: 1000px;
+    margin: 56px auto 0;
+    padding-top: 24px
+}
+
+.ft::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--r), var(--y) 55%, transparent)
+}
+
+.ft-lg {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.ft-lg img {
+    width: 38px !important;
+    height: 38px !important
+}
+
+.ft-lg b {
+    display: block;
+    font-size: 20px;
+    line-height: 1.1
+}
+
+.ft-lg small {
+    display: block;
+    margin-top: 3px
+}
+
+@media(max-width:760px) {
+    .ft {
+        margin-top: 40px
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    .fac-i {
+        transition-duration: .01s !important
+    }
+}
