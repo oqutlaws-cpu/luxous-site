@@ -1,0 +1,679 @@
+/* ABOUT */
+@property --ab {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #ffc918
+}
+
+h1 {
+    font-size: clamp(40px, 8vw, 84px);
+    line-height: .88
+}
+
+.ab {
+    min-height: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+    align-content: start
+}
+
+.ab>div:first-child {
+    max-width: 640px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 6px;
+    align-items: end;
+    justify-items: start
+}
+
+.ab>div:first-child>.big {
+    grid-column: 1;
+    grid-row: 1;
+    width: auto
+}
+
+.ab>div:first-child>.gl {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0
+}
+
+.ab>div:first-child>.mono,
+.ab>div:first-child>.dlg,
+.ab>div:first-child>.bars {
+    grid-column: 1 / -1
+}
+
+.ap {
+    display: none
+}
+
+.gl {
+    position: relative;
+    width: max-content;
+    max-width: 100%;
+    font-size: clamp(34px, 7vw, 76px);
+    line-height: .9;
+    margin: 6px 0 4px
+}
+
+.gl::before,
+.gl::after {
+    content: attr(data-t);
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    mix-blend-mode: screen
+}
+
+.gl::before {
+    color: var(--r);
+    animation: g1 4s infinite
+}
+
+.gl::after {
+    color: var(--ab);
+    animation: g2 4s infinite
+}
+
+@keyframes g1 {
+    0%, 88%, 100% { transform: none; clip-path: inset(0 0 100% 0) }
+    90% { transform: translate(-6px, 1px); clip-path: inset(12% 0 58% 0) }
+    95% { transform: translate(5px, -1px); clip-path: inset(62% 0 8% 0) }
+}
+
+@keyframes g2 {
+    0%, 89%, 100% { transform: none; clip-path: inset(0 0 100% 0) }
+    92% { transform: translate(6px, -1px); clip-path: inset(45% 0 30% 0) }
+    97% { transform: translate(-4px, 1px); clip-path: inset(8% 0 70% 0) }
+}
+
+.dlg {
+    position: relative;
+    margin-top: 18px;
+    padding: 16px 18px;
+    background: #0c0b0dcc;
+    border: 1px solid color-mix(in srgb, var(--ab) 33%, transparent)
+}
+
+.dlg::before,
+.dlg::after,
+.cd::before,
+.cd::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 3px solid var(--ab)
+}
+
+.dlg::before,
+.cd::before {
+    top: -4px;
+    left: -4px;
+    border-right: 0;
+    border-bottom: 0
+}
+
+.dlg::after,
+.cd::after {
+    bottom: -4px;
+    right: -4px;
+    border-left: 0;
+    border-top: 0
+}
+
+.dlg b {
+    display: block;
+    color: var(--ab);
+    font-size: 16px;
+    margin-bottom: 6px
+}
+
+.dlg p {
+    min-height: 5em;
+    line-height: 1.6;
+    color: #d8d2c8;
+    max-width: 52ch
+}
+
+.dlg p::after {
+    content: "▌";
+    color: var(--ab);
+    animation: bl 1s steps(1) infinite
+}
+
+@keyframes bl {
+    50% { opacity: 0 }
+}
+
+.bars {
+    margin-top: 16px;
+    max-width: 420px
+}
+
+.bars:empty {
+    display: none
+}
+
+.br {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 10px;
+    align-items: center;
+    margin-top: 8px
+}
+
+.br i {
+    height: 10px;
+    background: #ffffff14;
+    transform: skewX(-20deg);
+    overflow: hidden
+}
+
+.br b {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--r), var(--ab));
+    transition: width 1.2s .9s cubic-bezier(.22, .8, .2, 1)
+}
+
+.v.on .br b {
+    width: var(--w)
+}
+
+/* ROADMAP */
+.rm {
+    padding-bottom: 20px
+}
+
+.rm ol {
+    list-style: none;
+    padding: 0;
+    margin: 26px 0 0;
+    position: relative
+}
+
+.rm ol::before {
+    content: "";
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(var(--r), var(--ab));
+    box-shadow: 0 0 14px color-mix(in srgb, var(--r) 70%, transparent)
+}
+
+.rm li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 22px;
+    margin-bottom: 30px;
+    align-items: start
+}
+
+.rm li::before {
+    content: "";
+    position: absolute;
+    left: 58px;
+    top: 28px;
+    width: 22px;
+    height: 2px;
+    background: var(--ab)
+}
+
+.nd {
+    position: relative;
+    z-index: 1;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 3px solid var(--ab);
+    background: var(--bg);
+    color: var(--ab);
+    display: grid;
+    place-content: center;
+    font-size: 18px;
+    box-shadow: 0 0 18px color-mix(in srgb, var(--ab) 55%, transparent), 0 0 0 7px var(--bg)
+}
+
+.cd {
+    position: relative;
+    padding: 16px 18px 18px;
+    background: #0c0b0dcc;
+    border: 1px solid color-mix(in srgb, var(--ab) 33%, transparent)
+}
+
+.cd h3 {
+    font-size: clamp(20px, 3.6vw, 30px);
+    line-height: 1;
+    margin: 6px 0 10px
+}
+
+.cd p {
+    line-height: 1.65;
+    color: #d8d2c8;
+    max-width: 62ch
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px
+}
+
+.chips b {
+    padding: 6px 14px;
+    font-size: 14px;
+    color: var(--ab);
+    background: #1a181d;
+    border: 1px solid color-mix(in srgb, var(--ab) 40%, transparent)
+}
+
+@media(max-width:760px) {
+    .ab {
+        gap: 24px
+    }
+
+    .rm li {
+        grid-template-columns: 46px minmax(0, 1fr);
+        gap: 16px
+    }
+
+    .nd {
+        width: 46px;
+        height: 46px;
+        font-size: 15px
+    }
+
+    .rm ol::before {
+        left: 22px
+    }
+
+    .rm li::before {
+        left: 46px;
+        top: 22px;
+        width: 16px
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    .gl::before,
+    .gl::after,
+    .dlg p::after {
+        animation: none !important
+    }
+}
+
+#v-about .ab img[alt="Luxous"] {
+    width: 110px !important;
+    height: auto !important;
+    max-width: none !important;
+    object-fit: contain;
+    display: block;
+}
+
+#v-about .ab .brand img[alt="Luxous"] {
+    width: auto !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: contain;
+    display: block;
+}
+
+/* ROADMAP versi referensi */
+.tl {
+    position: relative;
+    margin-top: 28px;
+    padding: 6px 0
+}
+
+/* garis: jalur redup + garis terang yang terisi saat di-scroll (--p diisi about.js) */
+.tl::before,
+.tl::after {
+    content: "";
+    position: absolute;
+    left: 27px;
+    top: -22px;
+    width: 4px
+}
+
+.tl::before {
+    bottom: -22px;
+    background: repeating-linear-gradient(var(--ab) 0 10px, transparent 10px 16px);
+    opacity: .28
+}
+
+.tl::after {
+    height: min(calc(var(--p, 99999) * 1px), calc(100% + 44px));
+    /* warna mengikuti posisi di seluruh garis: merah (atas) -> kuning (bawah), seperti logo */
+    background: linear-gradient(var(--r), color-mix(in srgb, var(--r) 45%, var(--ab)) 50%, var(--ab)) top / 100% calc(var(--full) * 1px) no-repeat;
+    box-shadow: 0 0 10px color-mix(in srgb, var(--r) 80%, transparent), 0 0 28px color-mix(in srgb, var(--r) 45%, transparent)
+}
+
+/* tiap kartu memakai warna garis di posisinya (--ab diisi about.js); --ab0 = warna tema asli */
+.tl {
+    --ab0: var(--ab)
+}
+
+.ti {
+    position: relative;
+    padding-left: 98px;
+    margin-bottom: 38px;
+    min-height: 58px
+}
+
+.tn {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 3px solid var(--ab);
+    background: var(--bg);
+    color: var(--ab);
+    display: grid;
+    place-content: center;
+    font-size: 18px;
+    z-index: 1;
+    box-shadow: 0 0 18px color-mix(in srgb, var(--ab) 55%, transparent), 0 0 0 6px var(--bg)
+}
+
+.tn::before {
+    content: "";
+    position: absolute;
+    inset: -14px;
+    border-radius: 50%;
+    border: 1px dashed color-mix(in srgb, var(--ab) 30%, transparent)
+}
+
+.ti::before {
+    content: "";
+    position: absolute;
+    left: 58px;
+    top: 28px;
+    width: 36px;
+    height: 2px;
+    background: var(--ab)
+}
+
+.ti::after {
+    content: "";
+    position: absolute;
+    left: 91px;
+    top: 25px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ab);
+    box-shadow: 0 0 8px var(--ab)
+}
+
+.tc {
+    --cut: 14px;
+    position: relative;
+    min-width: 0;
+    padding: 18px 20px 34px;
+    background: color-mix(in srgb, var(--ab) 38%, transparent);
+    clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut))
+}
+
+.tc::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    background: #0e0d10;
+    clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut))
+}
+
+.tc>* {
+    position: relative
+}
+
+/* garis putus-putus kanan atas */
+.tc::after {
+    content: "";
+    position: absolute;
+    top: 30px;
+    left: 80px;
+    right: 24px;
+    border-top: 1px dashed color-mix(in srgb, var(--ab) 45%, transparent)
+}
+
+/* ikon berbingkai */
+.tic {
+    display: block;
+    position: relative;
+    width: 38px;
+    height: 38px;
+    padding: 9px;
+    margin-bottom: 14px;
+    color: var(--ab)
+}
+
+.tic svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linejoin: round
+}
+
+.tic::before,
+.tic::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--ab)
+}
+
+.tic::before {
+    top: 0;
+    left: 0;
+    border-right: 0;
+    border-bottom: 0
+}
+
+.tic::after {
+    bottom: 0;
+    right: 0;
+    border-left: 0;
+    border-top: 0
+}
+
+.tc h3 {
+    font-size: clamp(20px, 3.6vw, 30px);
+    line-height: 1.05;
+    margin: 6px 0 10px;
+    overflow-wrap: anywhere
+}
+
+.tc p {
+    line-height: 1.65;
+    color: #d8d2c8;
+    max-width: 62ch;
+    overflow-wrap: anywhere
+}
+
+/* titik-titik kiri bawah + siku kanan bawah */
+.tbar {
+    position: absolute !important;
+    left: 20px;
+    bottom: 14px;
+    width: 110px;
+    height: 3px;
+    background: repeating-linear-gradient(90deg, var(--ab) 0 6px, transparent 6px 10px);
+    -webkit-mask: linear-gradient(90deg, #000, transparent);
+    mask: linear-gradient(90deg, #000, transparent)
+}
+
+.tcr {
+    position: absolute !important;
+    right: 16px;
+    bottom: 12px;
+    width: 12px;
+    height: 12px;
+    border-right: 2px solid var(--ab);
+    border-bottom: 2px solid var(--ab)
+}
+
+@media(max-width:760px) {
+    .tl::before,
+    .tl::after {
+        left: 21px
+    }
+
+    .ti {
+        padding-left: 76px
+    }
+
+    .tn {
+        width: 46px;
+        height: 46px;
+        font-size: 15px
+    }
+
+    .ti::before {
+        left: 46px;
+        top: 22px;
+        width: 24px
+    }
+
+    .ti::after {
+        left: 67px;
+        top: 19px
+    }
+
+    .tc::after {
+        left: 70px
+    }
+}
+
+/* ===== PERBAIKAN ABOUT ===== */
+/* tulisan kecil di bawah logo */
+.ab>div:first-child>.mono {
+    margin-top: 14px;
+    font-size: 14px;
+    letter-spacing: .22em;
+    color: #b9b2a6
+}
+
+/* History: lebih kecil dari hero, latar digelapkan supaya kubus tidak menembus teks */
+.rm {
+    position: relative;
+    isolation: isolate;
+    margin-top: 10px
+}
+
+.rm::before {
+    content: "";
+    position: absolute;
+    inset: -24px -48px -10px;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 38% 30%, #0c0b0df2, #0c0b0dcc 55%, transparent 82%)
+}
+
+.rm h2 {
+    font-size: clamp(30px, 5vw, 52px);
+    line-height: 1
+}
+
+.rm>.mono {
+    margin-top: 10px;
+    font-size: 13px;
+    letter-spacing: .18em;
+    color: #b9b2a6
+}
+
+/* kartu tidak melebar penuh */
+.tl {
+    max-width: 780px
+}
+
+/* timeline menyala saat di-scroll (kelas .fx dipasang about.js) */
+.tn,
+.tc,
+.ti::before,
+.ti::after {
+    transition: border-color .5s, color .5s, box-shadow .5s, opacity .5s, transform .7s cubic-bezier(.22, .8, .2, 1), background .5s
+}
+
+.tl.fx .ti:not(.lit) .tn {
+    border-color: #ffffff30;
+    color: #ffffff55;
+    box-shadow: 0 0 0 6px var(--bg)
+}
+
+.tl.fx .ti:not(.lit)::before,
+.tl.fx .ti:not(.lit)::after {
+    opacity: .15
+}
+
+.tl.fx .ti:not(.lit) .tc {
+    opacity: .4;
+    transform: translateX(16px)
+}
+
+.tl.fx .ti.lit .tc {
+    background: color-mix(in srgb, var(--ab) 62%, transparent)
+}
+
+/* node terakhir yang menyala berdenyut */
+.ti.cur .tn {
+    animation: tpulse 2.2s ease-in-out infinite
+}
+
+@keyframes tpulse {
+    50% {
+        box-shadow: 0 0 30px color-mix(in srgb, var(--ab) 85%, transparent), 0 0 0 6px var(--bg)
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    .ti.cur .tn {
+        animation: none
+    }
+
+    .tn,
+    .tc,
+    .ti::before,
+    .ti::after {
+        transition-duration: .01s !important
+    }
+}
+
+/* ===== PERKECIL FONT ABOUT ===== */
+.dlg b { font-size: 13px; }
+.dlg p { font-size: 14px; line-height: 1.55; min-height: 4.5em; }
+
+.ab>div:first-child>.mono { font-size: 11px; letter-spacing: .16em; }
+.rm>.mono { font-size: 11px; letter-spacing: .12em; }
+
+.rm h2 { font-size: clamp(24px, 4.2vw, 40px); }
+
+.tc h3 { font-size: clamp(16px, 3vw, 24px); }
+.tc p { font-size: 13.5px; line-height: 1.55; }
+.tc .mono { font-size: 11px; }
+
+.chips b { font-size: 12px; padding: 5px 11px; }
+
+.tn { font-size: 15px; }
+
+@media (max-width: 760px) {
+  .dlg p { font-size: 13px; }
+  .tc p { font-size: 13px; }
+  .tc h3 { font-size: 17px; }
+  .tn { font-size: 13px; }
+}
