@@ -11,4 +11,4 @@ const ABRM = [
   { g: "Generasi 06", h: "Pyramid Game", p: "Luxous kembali independen tanpa ada kerja sama dengan pihak manapun." },
   { g: "Generasi 07", h: "Alice in Borderland", p: "Seiring berjalannya waktu, management semakin belajar dari kekurangan di generasi sebelumnya, memikirkan setiap stage yang akan dilalui Survivor. Semua komentar dan keluhan akan didengar oleh kami sendiri dan didiskusikan dengan baik. Sampai di titik ini, Luxous berhasil kembali dengan membawa Alice in Borderland sebagai generasi 07. Diharapkan pejuang masih bersemangat untuk melewati stage yang ada." },
 ];
-const ABBD = ["Ayaana", "Zeyva", "Flezea", "Lavender", "Charvi"];
+const ABBD = ["Ayaana", "Alzeyva", "Flezea", "Lavender", "Charvi"];

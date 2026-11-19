@@ -76,6 +76,8 @@ function fitT() {
     }
   });
 }
+/* pengaturan tab per generasi dari data/senior.js (SEN_TAB). Yang dikosongkan = otomatis seperti sebelumnya */
+const sTab = (n) => (typeof SEN_TAB !== "undefined" && SEN_TAB[n]) || {};
 const sBase = (i) => (typeof gTheme === "function" ? gTheme(i) : SC[i % 3]);
 const sApply = (el, c) => {
   el.style.setProperty("--c", c);
@@ -90,14 +92,25 @@ register({
     $("#files").innerHTML = G.map((g, i) => {
       const n = pad(g.n),
         ms = SEN[g.n] || [],
-        c0 = sBase(i),
-        tn = sEsc(sName(g, i));
-      return `<div class="sf${i ? "" : " act"}" style="--c:${c0};--k:${sTxt(c0)};--d:${sDeep(c0)};--ty:${TY[i % 6]};--z:${i + 1}"><b class="stb">${tn}</b><div class="sc"><span class="svt">${tn}</span><div class="spg"><div class="sh"><b>${n}</b><div>SURVIVOR<small>ARSIP GENERASI</small></div></div><div class="dash"></div><div class="mr"><span>ARSIP SURVIVOR</span><span>${pad(i + 1)} / ${pad(G.length)}</span></div><div class="tt"><span class="cd">CODE_${n} // SURVIVOR</span><h3>${tn}</h3><p>ARSIP SURVIVOR<br>GENERASI ${n}</p></div><div class="gr">${ms.map((m) => `<div class="mc"><div class="bk"><i>${m.i ? `<img src="${m.i}" alt="${m.a}">` : '<span class="ph">FOTO</span>'}</i></div><h4>${m.a}</h4><small>${m.r}</small></div>`).join("")}</div><div class="sb"><span>DAFTAR SURVIVOR</span><span>${pad(ms.length)} ORANG</span></div></div></div></div>`;
+        tb = sTab(g.n),
+        auto = sName(g, i),
+        c0 = tb.warna || sBase(i),
+        tj = sEsc(tb.judul || auto) /* judul besar di dalam file */,
+        th = sEsc(tb.handle || tb.judul || auto) /* label di handle abu-abu */,
+        ts = sEsc(
+          tb.samping || tb.judul || auto,
+        ) /* tulisan vertikal di tab tertutup */,
+        cat = tb.catatan
+          ? sEsc(tb.catatan).replace(/\n/g, "<br>")
+          : "ARSIP SURVIVOR<br>GENERASI " +
+            n /* catatan kecil di bawah judul */,
+        ty = tb.y || TY[i % 6]; /* posisi handle (naik-turun) */
+      return `<div class="sf${i ? "" : " act"}" style="--c:${c0};--k:${sTxt(c0)};--d:${sDeep(c0)};--ty:${ty};--z:${i + 1}"><b class="stb">${th}</b><div class="sc"><span class="svt">${ts}</span><div class="spg"><div class="sh"><b>${n}</b><div>SURVIVOR<small>ARSIP GENERASI</small></div></div><div class="dash"></div><div class="mr"><span>ARSIP SURVIVOR</span><span>${pad(i + 1)} / ${pad(G.length)}</span></div><div class="tt"><span class="cd">CODE_${n} // SURVIVOR</span><h3>${tj}</h3><p>${cat}</p></div><div class="gr">${ms.map((m) => `<div class="mc"><div class="bk"><i>${m.i ? `<img src="${m.i}" alt="${m.a}">` : '<span class="ph">FOTO</span>'}</i></div><h4>${m.a}</h4><small>${m.r}</small></div>`).join("")}</div><div class="sb"><span>DAFTAR SURVIVOR</span><span>${pad(ms.length)} ORANG</span></div></div></div></div>`;
     }).join("");
     /* ambil warna dominan poster (sama seperti Generasi); kalau G[i].c diisi manual, itu yang dipakai */
     $$("#files .sf").forEach((el, i) => {
       const g = G[i],
-        manual = typeof gG === "function" && gG(i).c;
+        manual = (typeof gG === "function" && gG(i).c) || sTab(g.n).warna;
       if (manual || !g.p || typeof gShot !== "function") return;
       gShot(g.p).then((c) => c && sApply(el, c));
     });
