@@ -198,7 +198,7 @@ const gsImg = (s) =>
     ? `<img src="${gEsc(s.img)}" alt="${gEsc(s.t || "Stage")}" decoding="async">`
     : `<div class="gs-ph">Gambar belum ada</div>`;
 const gsNote = (s) =>
-  `<span class="mono">Kesan stage</span><h4 class="gs-nt d">${gEsc(s.t || "Stage")}</h4><p class="gs-tx${s.note ? "" : " gd-ph"}">${gEsc(s.note || "Kesan stage ini belum diisi.")}</p>${gsUrl(s.link) ? `<a class="gs-ln" href="${gsUrl(s.link)}" target="_blank" rel="noopener noreferrer">Buka di Padlet ↗</a>` : ""}`;
+  `<span class="mono">Kisah balik</span><h4 class="gs-nt d">${gEsc(s.t || "Stage")}</h4><p class="gs-tx${s.note ? "" : " gd-ph"}">${gEsc(s.note || "Kisah balik stage ini belum diisi.")}</p>${gsUrl(s.link) ? `<a class="gs-ln" href="${gsUrl(s.link)}" target="_blank" rel="noopener noreferrer">Buka di Padlet ↗</a>` : ""}`;
 function gStages(i, n) {
   const L = gsList(i);
   if (!L.length)
