@@ -1,0 +1,138 @@
+/* OPENING: logo + UXOUS muncul satu per satu. Semua nama kelas diawali "in-" supaya tidak bentrok dengan CSS lain. */
+/* sebelum lapisan opening terpasang, isi web disembunyikan supaya tidak sempat berkedip */
+html.intro-on {
+    background: #0c0b0d
+}
+
+html.intro-on body>* {
+    visibility: hidden
+}
+
+#intro {
+    --h: min(26vw, 150px);
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    background: #0c0b0d;
+    visibility: visible !important;
+    transition: opacity .9s ease, filter .9s ease
+}
+
+#intro.out {
+    opacity: 0;
+    filter: blur(6px);
+    pointer-events: none
+}
+
+#intro::before {
+    content: "";
+    position: absolute;
+    width: 80vmin;
+    height: 80vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, #c412124d, transparent 65%);
+    animation: inGlow 3s ease both
+}
+
+@keyframes inGlow {
+    0% { opacity: 0; transform: scale(.4) }
+    50% { opacity: 1 }
+    100% { opacity: .7; transform: scale(1.1) }
+}
+
+.in-lk {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: calc(var(--h) * .08);
+    padding: 0 4px 14px;
+    transition: transform 1s cubic-bezier(.3, 0, .2, 1)
+}
+
+#intro.out .in-lk {
+    transform: scale(1.1)
+}
+
+.in-lg {
+    display: block;
+    width: auto !important;
+    height: var(--h) !important;
+    max-width: none !important;
+    animation: inL 1.1s .2s both cubic-bezier(.2, .8, .2, 1);
+    user-select: none;
+    -webkit-user-drag: none
+}
+
+@keyframes inL {
+    from { opacity: 0; transform: scale(.88); filter: blur(14px) }
+    to { opacity: 1; transform: none; filter: none }
+}
+
+.in-tx {
+    position: relative;
+    display: flex;
+    margin-bottom: calc(var(--h) * .02);
+    font-family: Cinzel, Georgia, serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    font-size: calc(var(--h) * .56);
+    line-height: .9;
+    color: #f3efe8
+}
+
+.in-tx span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-22px);
+    filter: blur(9px);
+    text-shadow: 0 0 22px #c4121266
+}
+
+.in-tx span.in {
+    animation: inT .5s cubic-bezier(.2, .8, .2, 1) both
+}
+
+@keyframes inT {
+    to { opacity: 1; transform: none; filter: none }
+}
+
+/* glitch singkat setelah semua huruf muncul (gaya sama dengan judul About) */
+.in-tx::before,
+.in-tx::after {
+    content: attr(data-t);
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    letter-spacing: .06em
+}
+
+.in-tx.in-g::before {
+    color: #c41212;
+    animation: inG1 .75s both
+}
+
+.in-tx.in-g::after {
+    color: #ffc918;
+    animation: inG2 .75s both
+}
+
+@keyframes inG1 {
+    0%, 100% { opacity: 0 }
+    12% { opacity: 1; transform: translate(-7px, 1px); clip-path: inset(10% 0 58% 0) }
+    38% { opacity: 1; transform: translate(6px, -1px); clip-path: inset(60% 0 8% 0) }
+    64% { opacity: 1; transform: translate(-4px, 0); clip-path: inset(30% 0 40% 0) }
+}
+
+@keyframes inG2 {
+    0%, 100% { opacity: 0 }
+    18% { opacity: 1; transform: translate(7px, -1px); clip-path: inset(45% 0 30% 0) }
+    45% { opacity: 1; transform: translate(-6px, 1px); clip-path: inset(6% 0 72% 0) }
+    72% { opacity: 1; transform: translate(4px, 0); clip-path: inset(62% 0 12% 0) }
+}
